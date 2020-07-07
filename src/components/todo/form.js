@@ -3,21 +3,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import useForm from '../../hooks/use-form.js';
 
+import { SettingsContext } from '../../context/settings.js';
+
 function TodoForm(props) {
   const [item, handleInputChange, handleSubmit] = useForm(props);
-  // const [item, setItem] = useState({});
-
-  // const handleInputChange = e => {
-  //   setItem({ ...item, [e.target.name]: e.target.value, status: false,  });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   e.target.reset();
-  //   props.handleSubmit(item);
-  //   const emptyItem = {};
-  //   setItem(emptyItem);
-  // };
   return (
     <>
       <Form onSubmit={handleSubmit}>
