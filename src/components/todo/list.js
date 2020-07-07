@@ -42,7 +42,6 @@ function TodoList (props) {
           Assignee: {item.assignee}
             <span>Task: {item.item}</span>
             <span>Difficulty: {item.difficulty}</span>
-
           </span>
         </li>
       ))
