@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "homepage": "/",
   "dependencies": {
     "bootstrap": "^4.5.0",
     "node-sass": "^4.14.1",
