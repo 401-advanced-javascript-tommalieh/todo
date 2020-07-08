@@ -5,7 +5,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import { SettingsContext } from '../../context/settings.js';
-
+import { LoginContext } from '../../context/login-auth.js';
+import LoginForm from './login-form.js';
+import SignUpForm from './signup-form.js';
 import './todo.scss';
 import useAjax from '../../hooks/use-ajax.js';
 
@@ -15,7 +17,8 @@ const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 const ToDo = () => {
 
   const [list, setList] = useState([]);
-  const siteContext = useContext(SettingsContext)
+  const siteContext = useContext(SettingsContext);
+  const loginContext = useContext(LoginContext);
   const _addItem = (item) => {
     console.log('hey')
     item.due = new Date();
@@ -78,7 +81,7 @@ const ToDo = () => {
   list.sort((a, b) => {
     return Number(a.difficulty) - Number(b.difficulty);
   });
-  
+
 
   const currentPagePosts = list.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -95,34 +98,45 @@ const ToDo = () => {
         <Navbar bg="primary" variant="dark" expand="lg">
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
+            <LoginForm />
+            <SignUpForm />
           </Nav>
         </Navbar>
-        <Navbar bg="dark" variant="dark" expand="lg">
-          <Nav className="mr-auto">
-            <h2>
-              There are {list.filter(item => !item.complete).length} Items To Complete
-            </h2>
-          </Nav>
-        </Navbar>
+        {loginContext.loggedInState ?
 
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Nav className="mr-auto">
+              <h2>
+                There are {list.filter(item => !item.complete).length} Items To Complete
+            </h2>
+            </Nav>
+          </Navbar>
+          :
+          null
+        }
       </header>
 
-      <section className="todo">
+      {loginContext.loggedInState ? 
+        <section className="todo">
+          <div>
+            <TodoForm handleSubmit={_addItem} />
+          </div>
 
-        <div>
-          <TodoForm handleSubmit={_addItem} />
-        </div>
+          <div>
+            <TodoList
+              list={currentPagePosts}
+              handleComplete={_toggleComplete}
+              deleteOnClick={_deleteTodoItem}
+              fetchPageItems={_getTodoItems}
+            />
+          </div>
+        </section>
+        :
+        null
+      }
 
-        <div>
-          <TodoList
-            list={currentPagePosts}
-            handleComplete={_toggleComplete}
-            deleteOnClick={_deleteTodoItem}
-            fetchPageItems={_getTodoItems}
-          />
-        </div>
-      </section>
     </>
+
   );
 };
 
