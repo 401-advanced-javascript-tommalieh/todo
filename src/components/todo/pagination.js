@@ -12,6 +12,7 @@ function Pagination(props){
     // console.log(pageNumbers)
 
     function changePage(number){
+        
         console.log(number);
         siteContext.changeCurrentPage(number);
         console.log(siteContext.currentPage);
