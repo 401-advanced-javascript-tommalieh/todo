@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "homepage":"/",
   "dependencies": {
     "bootstrap": "^4.5.0",
     "node-sass": "^4.14.1",
@@ -15,12 +16,16 @@
     "react-scripts": "3.4.1",
     "uuid": "8.1.0"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint '**/*.js'"
   },
   "browserslist": {
     "production": [
