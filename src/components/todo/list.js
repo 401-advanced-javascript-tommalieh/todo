@@ -1,9 +1,6 @@
 import React from 'react';
 
 function TodoList (props) {
-  {
-    // console.log(props.list[0]);
-  }
   return (
     <ul>
       {props.list.map(item => (

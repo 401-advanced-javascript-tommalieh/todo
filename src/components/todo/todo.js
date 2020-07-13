@@ -8,6 +8,7 @@ import './todo.scss';
 function ToDo(props) {
   const [list, setList] = useState([]);
   const [item, setItem] = useState({});
+  // eslint-disable-next-line no-unused-vars
   const addItem = (item) => {
     item._id = Math.random();
     item.complete = false;

@@ -15,7 +15,7 @@ const ToDo = () => {
   const [list, setList] = useState([]);
 
   const _addItem = (item) => {
-    console.log('hey')
+    console.log('hey');
     item.due = new Date();
     console.log(item);
     // fetch(todoAPI, {
@@ -36,48 +36,48 @@ const ToDo = () => {
   const _toggleComplete = id => {
     let item = list.filter(i => i._id === id)[0] || {};
     // if (item._id) {
-      const itemStatus = JSON.parse(item.status);
-      item.status = !(itemStatus);
+    const itemStatus = JSON.parse(item.status);
+    item.status = !(itemStatus);
 
-      let url = `${todoAPI}/${id}`;
+    let url = `${todoAPI}/${id}`;
 
-      // fetch(url, {
-      //   method: 'put',
-      //   mode: 'cors',
-      //   cache: 'no-cache',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(item),
-      // })
-      useAjax(url, 'put', item, item._id)
-        .then(response => response.json())
-        .then(savedItem => {
-        console.log(savedItem.status)
-          setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
-        })
-        .catch(console.error);
+    // fetch(url, {
+    //   method: 'put',
+    //   mode: 'cors',
+    //   cache: 'no-cache',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(item),
+    // })
+    useAjax(url, 'put', item, item._id)
+      .then(response => response.json())
+      .then(savedItem => {
+        console.log(savedItem.status);
+        setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
+      })
+      .catch(console.error);
     // }
   };
 
   const _deleteTodoItem = id => {
     let item = list.filter(i => i._id === id)[0] || {};
     // if (item._id) {
-      let url = `${todoAPI}/${id}`;
+    let url = `${todoAPI}/${id}`;
 
-      // fetch(url, {
-      //   method: 'delete',
-      //   mode: 'cors',
-      //   cache: 'no-cache',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   // body: JSON.stringify(item),
-      // })
-      useAjax(url, 'delete', item, item._id)
-        .then(response => response.json())
-        .then(savedItem => {
-        console.log(savedItem.status)
-          // setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
-          _getTodoItems();
-        })
-        .catch(console.error);
+    // fetch(url, {
+    //   method: 'delete',
+    //   mode: 'cors',
+    //   cache: 'no-cache',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   // body: JSON.stringify(item),
+    // })
+    useAjax(url, 'delete', item, item._id)
+      .then(response => response.json())
+      .then(savedItem => {
+        console.log(savedItem.status);
+        // setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
+        _getTodoItems();
+      })
+      .catch(console.error);
     // }
     // console.log(item.complete)
 
@@ -91,9 +91,10 @@ const ToDo = () => {
     useAjax(todoAPI, 'get')
       .then(data => data.json())
       .then(data => {
-         data.results.map(item => {
+        // eslint-disable-next-line array-callback-return
+        data.results.map(item => {
           item.complete = false;
-        })
+        });
         setList(data.results);
       })
       .catch(console.error);
@@ -104,7 +105,7 @@ const ToDo = () => {
   return (
     <>
       <header>
-      <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar bg="primary" variant="dark" expand="lg">
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
           </Nav>
